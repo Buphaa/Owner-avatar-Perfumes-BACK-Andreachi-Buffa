@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@types/jsonfile": "^6.1.4",
+    "@types/moment": "^2.11.29",
+    "jsonfile": "^6.1.0",
+    "moment": "^2.30.1"
+  }
+}
