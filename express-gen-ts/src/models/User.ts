@@ -14,6 +14,7 @@ export interface IUser {
   name: string;
   email: string;
   created: Date;
+  role: 'user' | 'moderator';
 }
 
 
@@ -26,13 +27,15 @@ function new_(
   name?: string,
   email?: string,
   created?: Date,
-  id?: number, // id last cause usually set by db
+  id?: number,
+  role: 'user' | 'moderator' = 'user', // Predeterminado a 'user'
 ): IUser {
   return {
     id: (id ?? -1),
     name: (name ?? ''),
     email: (email ?? ''),
     created: (created ? new Date(created) : new Date()),
+    role,
   };
 }
 
@@ -56,10 +59,10 @@ function isUser(arg: unknown): arg is IUser {
     'id' in arg && typeof arg.id === 'number' && 
     'email' in arg && typeof arg.email === 'string' && 
     'name' in arg && typeof arg.name === 'string' &&
-    'created' in arg && moment(arg.created as string | Date).isValid()
+    'created' in arg && moment(arg.created as string | Date).isValid() &&
+    'role' in arg && (arg.role === 'user' || arg.role === 'moderator')
   );
 }
-
 
 // **** Export default **** //
 
